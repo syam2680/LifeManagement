@@ -78,6 +78,7 @@ public class SummaryAPI {
 		headers.add("Due Date");
 		headers.add("End Date");
 		headers.add("Priority");
+		headers.add("Category");
 		return headers;
 	}
 
@@ -90,6 +91,8 @@ public class SummaryAPI {
 		requireFields.add("dueDate");
 		requireFields.add("endDate");
 		requireFields.add("priority");
+		requireFields.add("category");
+		
 		return requireFields;
 	}
 

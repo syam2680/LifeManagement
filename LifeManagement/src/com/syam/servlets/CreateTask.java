@@ -30,6 +30,7 @@ public class CreateTask extends HttpServlet {
 		Date startDate=null;
 		Date dueDate=null;
 		int priority=Integer.valueOf(request.getParameter("priority"));
+		String category=request.getParameter("category");
 		try {
 			startDate=df.parse(request.getParameter("startDate"));
 			dueDate=df.parse(request.getParameter("dueDate"));
@@ -37,7 +38,7 @@ public class CreateTask extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Task t=new Task(taskName,startDate,dueDate,priority);
+		Task t=new Task(taskName,startDate,dueDate,priority,category);
 		response.sendRedirect("/LifeManagement/GetTask?id="+t.getTaskID());
 	}
 

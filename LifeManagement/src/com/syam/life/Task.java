@@ -32,11 +32,13 @@ public class Task implements Serializable {
 	private Date endDate;
 	@Element
 	private int priority;
+	@Element
+	private String category;
 	private static TreeMap<Integer, Task> database = new TreeMap<Integer, Task>();
 	//@Element
 	//private List<Task> subtask;
 	static {		
-		File file = new File("/Users/syamk/Documents/LifeManagement/xml");
+		File file = new File("/Users/syamk/Desktop/LifeManagement/xml");
 		
 		for (File source : file.listFiles()) {
 			System.out.println(source.getName());
@@ -53,7 +55,7 @@ public class Task implements Serializable {
 		}
 	}
 
-	public Task(String taskName, Date startDate, Date dueDate,int priority) {
+	public Task(String taskName, Date startDate, Date dueDate,int priority,String category) {
 		this.taskName = taskName;
 		this.startDate = startDate;
 		this.dueDate = dueDate;
@@ -61,6 +63,7 @@ public class Task implements Serializable {
 		this.endDate = dueDate;
 		this.taskID = ID.incrementAndGet();
 		this.priority=priority;
+		this.category=category;
 		//this.subtask=new ArrayList<Task>();
 		database.put(taskID, this);
 		this.save();
@@ -120,5 +123,5 @@ public class Task implements Serializable {
 
 	}
 
-	private static String WD="/Users/syamk/Documents/LifeManagement/xml/";
+	private static String WD="/Users/syamk/Desktop/LifeManagement/xml/";
 }
