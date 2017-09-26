@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.syam.db.CreateConnection;
+
 /**
  * Servlet implementation class CreateTask
  */
@@ -37,17 +39,9 @@ public class CreateTask extends HttpServlet {
 			startDate=request.getParameter("startDate");
 			dueDate=request.getParameter("dueDate");
 		
-		try  {
-			
-			String url = "jdbc:sqlite:/Users/syamk/Documents/Database/lifemanagement.db";
-	        Connection conn = null;
-	        try {
-	        	Class.forName("org.sqlite.JDBC").newInstance();
-	            conn = DriverManager.getConnection(url);
-	            System.out.println("Connection to SQLite has been established.");
-	        } catch (Exception e) {
-	            System.out.println(e.getMessage());
-	        }
+		try  {		
+	        Connection conn = CreateConnection.getConnection();
+
 	        PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, goal);
             pstmt.setString(2, category);
