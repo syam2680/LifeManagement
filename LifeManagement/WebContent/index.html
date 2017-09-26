@@ -3,20 +3,34 @@
 <head>
   <title>Life Management System</title>
   <meta charset="utf-8">
+  <script>
+function myFunction() {
+    document.getElementById("due_date").value = new Date();
+}
+</script>
 </head>
-<body>
+<body onload="myFunction()">
+
 
 <form action="/LifeManagement/CreateTask" method="post">
 Goal
-<input type="text" name="goal" >
+<input type="text" name="GOAL" >
 Start Date
-<input type="datetime-local" name="startDate" >
+<input type="datetime-local" name="START_DATE" >
 Due Date
-<input type="datetime-local" name="dueDate" >
+<input type="datetime-local" name="DUE_DATE" >
+<input type="hidden" id="due_date" name="END_DATE">
 Priority
-<input type="text" name="priority" >
+<input type="text" name="PRIOTIY" >
+<br>
+Status
+<input type="text" name="STATUS" >
 Category
-<input type="text" name="category" >
+<input type="text" name="CATEGORY" >
+Type
+<input type="text" name="TYPE" >
+Parent
+<input type="text" name="PARENT_GOAL_ID" >
 <input type="submit" value="Create Task">
 </form> 
 

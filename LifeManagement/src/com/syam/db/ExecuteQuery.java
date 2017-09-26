@@ -14,10 +14,11 @@ public class ExecuteQuery {
 		try {
 			pstmt = conn.prepareStatement(query);
 			for (int i = 1; i <= values.size(); i++) {
+				System.out.println(i  + " "+ types.get(i-1) + " " + values.get(i-1));
 				if (types.get(i - 1).equals("String")) {
-					pstmt.setString(i, values.get(i));
-				} else if (types.get(i - 1).equals("Integer")) {
-					pstmt.setInt(i, Integer.valueOf(values.get(i)));
+					pstmt.setString(i, values.get(i-1));
+				} else if (types.get(i - 1).equals("Integer")) {					
+					pstmt.setInt(i, Integer.valueOf(values.get(i-1)));
 				}
 			}
 			pstmt.executeUpdate();
@@ -63,6 +64,61 @@ public class ExecuteQuery {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static ArrayList<String>  getColumns(int id) {
+		Connection conn = CreateConnection.getConnection();
+		Statement stmt = null;
+		ArrayList<String> columns=new ArrayList<String> ();
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT REPORT_COLUMN FROM REPORT_HEADERS WHERE REPORT_ID=" + id + " ORDER BY REPORT_HEADER_SEQ;");
+			while (rs.next()) {
+				columns.add(rs.getString("REPORT_COLUMN"));
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return columns;
+	}
+	
+	public static ArrayList<String>  getTypes(int id) {
+		Connection conn = CreateConnection.getConnection();
+		Statement stmt = null;
+		ArrayList<String> types=new ArrayList<String> ();
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT COLUMN_JAVA_TYPE FROM REPORT_HEADERS WHERE REPORT_ID=" + id + " ORDER BY REPORT_HEADER_SEQ;");
+			while (rs.next()) {
+				types.add(rs.getString("COLUMN_JAVA_TYPE"));
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return types;
+	}
+	
+	
+	public static ArrayList<String> getHeaders(int id) {
+		Connection conn = CreateConnection.getConnection();
+		Statement stmt = null;
+		ArrayList<String> headers=new ArrayList<String> ();
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT REPORT_HEADER FROM REPORT_HEADERS WHERE REPORT_ID=" + id + " ORDER BY REPORT_HEADER_SEQ;");
+			while (rs.next()) {
+				headers.add(rs.getString("REPORT_HEADER"));
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return headers;
 	}
 	
 	public static void fetchData(int id,String filter,ArrayList<String> headers,ArrayList<String> values) {
