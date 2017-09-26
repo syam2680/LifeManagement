@@ -32,7 +32,8 @@ public class CreateTask extends HttpServlet {
 		}
 		System.out.println(values);
 		System.out.println(values.size());
-		ExecuteQuery.insert(1, values, types);
+		int id=ExecuteQuery.insert(1, values, types);
+		response.sendRedirect("/LifeManagement/GetTask?id="+id);
 	}
 
 }

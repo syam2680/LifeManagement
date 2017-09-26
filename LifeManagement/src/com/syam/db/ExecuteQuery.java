@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ExecuteQuery {
-	public static void insert(int id, ArrayList<String> values, ArrayList<String> types) {
+	public static int insert(int id, ArrayList<String> values, ArrayList<String> types) {
 		Connection conn = CreateConnection.getConnection();
 		String query = getQuery(id);
 		PreparedStatement pstmt = null;
@@ -25,6 +25,7 @@ public class ExecuteQuery {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return getMaxGoalID();
 	}
 
 	public static String getQuery(int id) {
@@ -45,27 +46,7 @@ public class ExecuteQuery {
 		return query;
 	}
 	
-	public static void getHeadersAndColumns(int id,ArrayList<String> headers,ArrayList<String> columns) {
-		Connection conn = CreateConnection.getConnection();
-		Statement stmt = null;
-		String query = null;
-		try {
-			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT REPORT_HEADER FROM REPORT_HEADERS WHERE REPORT_ID=" + id + " ORDER BY REPORT_HEADER_SEQ;");
-			while (rs.next()) {
-				headers.add(rs.getString("REPORT_HEADER"));
-			}
-			rs = stmt.executeQuery("SELECT REPORT_COLUMN FROM REPORT_HEADERS WHERE REPORT_ID=" + id + " ORDER BY REPORT_HEADER_SEQ;");
-			while (rs.next()) {
-				columns.add(rs.getString("REPORT_COLUMN"));
-			}
-			rs.close();
-			stmt.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+		
 	public static ArrayList<String>  getColumns(int id) {
 		Connection conn = CreateConnection.getConnection();
 		Statement stmt = null;
@@ -102,6 +83,24 @@ public class ExecuteQuery {
 		return types;
 	}
 	
+	public static int  getMaxGoalID() {
+		Connection conn = CreateConnection.getConnection();
+		Statement stmt = null;
+		int goalID=0;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT MAX(GOAL_ID) GOAL_ID FROM GOALS");
+			while (rs.next()) {
+				goalID=Integer.valueOf((rs.getString("GOAL_ID")));
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return goalID;
+	}
+	
 	
 	public static ArrayList<String> getHeaders(int id) {
 		Connection conn = CreateConnection.getConnection();
@@ -121,24 +120,30 @@ public class ExecuteQuery {
 		return headers;
 	}
 	
-	public static void fetchData(int id,String filter,ArrayList<String> headers,ArrayList<String> values) {
+	public static ArrayList<ArrayList<String>> fetchData(int id,String filter) {
 		Connection conn = CreateConnection.getConnection();
 		Statement stmt = null;
 		String query = getQuery(id);
-		ArrayList<String> columns=new ArrayList<String>();
-		int i=0;
-		getHeadersAndColumns(id, headers, columns);
+		ArrayList<String> columns=getColumns(id);
+		ArrayList<String> headers=getHeaders(id);
+		ArrayList<ArrayList<String>> data=new 	ArrayList<ArrayList<String>>();		
 		try {
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(query + " " + filter + ";");
 			while (rs.next()) {
-				values.add(rs.getString(columns.get(i++)));
+				ArrayList<String> temp=new ArrayList<String>();
+				for(String column:columns)
+				{
+					temp.add(rs.getString(column));
+				}
+				data.add(temp);
 			}
 			rs.close();
 			stmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return data;
 	}
 	
 }

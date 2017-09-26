@@ -40,6 +40,30 @@ public class SummaryAPI {
 		return table.toString();
 	}
 
+	public static String getGoalReport(ArrayList<ArrayList<String>> data, ArrayList<String> headers) {
+		StringBuilder table = new StringBuilder();
+		table.append(TABLE_START);
+		table.append(TABLE_ROW_START);
+		for (String header : headers) {
+			table.append(TABLE_HEADER_START);
+			table.append(header);
+			table.append(TABLE_HEADER_END);
+		}
+		table.append(TABLE_ROW_END);
+		for (ArrayList<String> d : data) {
+			table.append(TABLE_ROW_START);
+			for (String f : d) {
+				table.append(TABLE_DATA_START);
+				table.append(f);
+				table.append("\n");
+				table.append(TABLE_DATA_END);
+			}
+			table.append(TABLE_ROW_END);
+		}
+		table.append(TABLE_END);
+		return table.toString();
+	}
+
 	public static String getTask(int id) throws IllegalArgumentException, IllegalAccessException {
 		TreeMap<Integer, Task> database = Task.getDB();
 		StringBuilder table = new StringBuilder();
@@ -92,7 +116,7 @@ public class SummaryAPI {
 		requireFields.add("endDate");
 		requireFields.add("priority");
 		requireFields.add("category");
-		
+
 		return requireFields;
 	}
 
@@ -104,4 +128,5 @@ public class SummaryAPI {
 	private static String TABLE_DATA_END = "</td>\n";
 	private static String TABLE_HEADER_START = "<th>\n";
 	private static String TABLE_HEADER_END = "</th>\n";
+
 }
