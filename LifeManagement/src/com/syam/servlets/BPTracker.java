@@ -11,19 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.syam.db.ExecuteQuery;
 
-/**
- * Servlet implementation class CreateTask
- */
-@WebServlet("/CreateTask")
-public class CreateTask extends HttpServlet {
-
+@WebServlet("/BPTracker")
+public class BPTracker extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int sID=ExecuteQuery.getServletId("CreateTask");
+		int sID=ExecuteQuery.getServletId("BPTracker");
 		ArrayList<String> types = ExecuteQuery.getTypes(sID);
 		ArrayList<String> columns = ExecuteQuery.getColumns(sID);
 		ArrayList<String> values = new ArrayList<String>();
@@ -35,5 +31,4 @@ public class CreateTask extends HttpServlet {
 		int id=ExecuteQuery.insert(sID, values, types);
 		response.sendRedirect("/LifeManagement/GetTask?id="+id);
 	}
-
 }

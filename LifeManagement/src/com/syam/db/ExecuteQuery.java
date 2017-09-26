@@ -52,7 +52,7 @@ public class ExecuteQuery {
 		int id = 0;
 		try {
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT SERVLET_ID FROM SERVLET_IDS WHERE SERVLET_NAME=" + servletName + ";");
+			ResultSet rs = stmt.executeQuery("SELECT SERVLET_ID FROM SERVLET_IDS WHERE SERVLET_NAME=" + "'" +  servletName + "';");
 			while (rs.next()) {
 				id = Integer.valueOf(rs.getString("SERVLET_ID"));
 			}

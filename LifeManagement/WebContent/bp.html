@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Life Management System</title>
+  <meta charset="utf-8">
+  <script>
+function myFunction() {
+    document.getElementById("due_date").value = new Date();
+}
+</script>
+</head>
+<body onload="myFunction()">
+
+
+<form action="/LifeManagement/BPTracker" method="post">
+Date
+<input type="text" name="TRACKING_DATE" >
+Systolic Pressure
+<input type="text" name="SYSTOLIC" >
+Diastolic Pressure
+<input type="text" name="DIASTOLIC" >
+<input type="hidden" name="UNITS" value="mmHg" >
+<input type="submit" value="Input BP">
+</form> 
+
+</body>
+</html>
