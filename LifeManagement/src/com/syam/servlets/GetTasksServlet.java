@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.syam.db.ExecuteQuery;
 import com.syam.reporter.SummaryAPI;
 
-@WebServlet("/getTasks")
+@WebServlet("/GetALLTasks")
 public class GetTasksServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
 		try {
-			ArrayList<ArrayList<String>> data=ExecuteQuery.fetchData(2, "");
-			ArrayList<String> headers=ExecuteQuery.getHeaders(2);
+			int sID=ExecuteQuery.getServletId("GetALLTasks");
+			ArrayList<ArrayList<String>> data=ExecuteQuery.fetchData(sID, "");
+			ArrayList<String> headers=ExecuteQuery.getHeaders(sID);
 			response.getWriter().println(SummaryAPI.getGoalReport(data,headers));
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block

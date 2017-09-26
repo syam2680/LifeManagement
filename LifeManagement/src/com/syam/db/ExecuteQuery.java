@@ -46,6 +46,24 @@ public class ExecuteQuery {
 		return query;
 	}
 	
+	public static int getServletId(String servletName) {
+		Connection conn = CreateConnection.getConnection();
+		Statement stmt = null;
+		int id = 0;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT SERVLET_ID FROM SERVLET_IDS WHERE SERVLET_NAME=" + servletName + ";");
+			while (rs.next()) {
+				id = Integer.valueOf(rs.getString("SERVLET_ID"));
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
 		
 	public static ArrayList<String>  getColumns(int id) {
 		Connection conn = CreateConnection.getConnection();

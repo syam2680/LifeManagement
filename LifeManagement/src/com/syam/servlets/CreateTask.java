@@ -23,9 +23,9 @@ public class CreateTask extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		ArrayList<String> types = ExecuteQuery.getTypes(1);
-		ArrayList<String> columns = ExecuteQuery.getColumns(1);
+		int sID=ExecuteQuery.getServletId("CreateTask");
+		ArrayList<String> types = ExecuteQuery.getTypes(sID);
+		ArrayList<String> columns = ExecuteQuery.getColumns(sID);
 		ArrayList<String> values = new ArrayList<String>();
 		for (int i = 0; i < columns.size(); i++) {
 			values.add(request.getParameter(columns.get(i)));
