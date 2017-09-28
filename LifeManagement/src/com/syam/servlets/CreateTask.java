@@ -23,16 +23,7 @@ public class CreateTask extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int sID=ExecuteQuery.getServletId("CreateTask");
-		ArrayList<String> types = ExecuteQuery.getTypes(sID);
-		ArrayList<String> columns = ExecuteQuery.getColumns(sID);
-		ArrayList<String> values = new ArrayList<String>();
-		for (int i = 0; i < columns.size(); i++) {
-			values.add(request.getParameter(columns.get(i)));
-		}
-		System.out.println(values);
-		System.out.println(values.size());
-		int id=ExecuteQuery.insert(sID, values, types);
+		int id=(int) ProcessServlet.process(request,response,"CreateTask");
 		response.sendRedirect("/LifeManagement/GetTask?id="+id);
 	}
 

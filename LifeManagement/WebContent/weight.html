@@ -12,7 +12,7 @@ body  {
     padding-top: 40px;
 }
 
-.form-inline{
+.form-horizontal{
 	color:white;
 }
 </style>
@@ -24,31 +24,25 @@ body  {
 </head>
 <body onload="updateCategories();updateTypes()">
 <div class="container">
-  <form class="form-inline" >
+  <form class="form-horizontal" action="saveWeight()">
         <div class="form-group">
-        <label class="control-label col-sm-3" for="TRACKING_DATE">Date</label>
-	      <div class="col-sm-2">
+        <label class="control-label col-sm-2" for="TRACKING_DATE">Date</label>
+	      <div class="col-sm-5">
 	        <input type="date" class="form-control" id="TRACKING_DATE"  name="TRACKING_DATE">
 	      </div>
 	    </div>
     
         <div class="form-group">
-        <label class="control-label col-sm-4" for="SYSTOLIC">Systolic Pressure:</label>
-	      <div class="col-sm-1">
-	        <input type="text" class="form-control" id="SYSTOLIC" placeholder="Systolic Pressure" name="SYSTOLIC">
+        <label class="control-label col-sm-2" for="WEIGHT">Weight</label>
+	      <div class="col-sm-5">
+	        <input type="text" class="form-control" id="WEIGHT" placeholder="Weight" name="WEIGHT">
 	      </div>
 	    </div>
-           
-        <div class="form-group">
-        <label class="control-label col-sm-4" for="DIASTOLIC">Diastolic Pressure:</label>
-	      <div class="col-sm-1">
-	        <input type="text" class="form-control" id="DIASTOLIC" placeholder="Diastolic Pressure" name="DIASTOLIC">
-	      </div>
-	    </div>
+          
 	               
      <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="button" class="btn btn-default" onclick="saveBloodPressure()">Save</button>
+        <button type="submit" class="btn btn-default">Save</button>
       </div>
     </div>
   </form>

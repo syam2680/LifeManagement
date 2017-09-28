@@ -1,29 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Life Management System</title>
-  <meta charset="utf-8">
+<title>Life</title>
+<meta charset="utf-8">
+<style>
+body  {
+    background-image: url("hd-beautiful-nature-wallpaper_042327317_304.jpg");
+    background-color: #cccccc;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    padding-top: 40px;
+}
+
+.form-horizontal{
+	color:white;
+}
+</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="scripts.js"></script>
 </head>
-<body>
-
-<form action="/LifeManagement/CreateTask" method="post">
-Task:<br>
-<input type="text" name="taskName" >
-<br>
-Start Date:<br>
-<input type="datetime-local" name="startDate" >
-<br>
-Due Date:<br>
-<input type="datetime-local" name="dueDate" >
-<br>
-Priority:<br>
-<input type="text" name="priority" >
-<br>
-Category:<br>
-<input type="text" name="category" >
-<br><br>
-<input type="submit" value="Create Task">
-</form> 
-
+<body onload="updateCategories();updateTypes()">
+<div class="container">
+  <form class="form-horizontal" action="/action_page.php">
+    <div class="form-group">
+     <label class="control-label col-sm-2 " for="email" >Goal:</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" id="GOAL" placeholder="Goal" name="GOAL">
+      </div>
+    </div>
+     <div class="form-group">
+     <label class="control-label col-sm-2" for="CATEGORY">Category:</label>
+     <div class="col-sm-5" id="CATEGORY" >
+     
+      </div>      
+    </div>
+    
+     <div class="form-group">
+     <label class="control-label col-sm-2" for="TYPE">Type:</label>
+     <div class="col-sm-5" id="TYPE" >
+     
+      </div>      
+    </div>
+        <div class="form-group">
+        <label class="control-label col-sm-2" for="START_DATE">Start On:</label>
+	      <div class="col-sm-5">
+	        <input type="date" class="form-control" id="START_DATE" placeholder="Start On" name="START_DATE">
+	      </div>
+	    </div>
+        <div class="form-group">
+        <label class="control-label col-sm-2" for="DUE_DATE">Complete By:</label>
+      <div class="col-sm-5">
+        <input type="date" class="form-control" id="DUE_DATE" placeholder="Complete By " name="DUE_DATE">
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="END_DATE">Completed Date:</label>
+      <div class="col-sm-5">
+        <input type="date" class="form-control" id="END_DATE" placeholder="Completed On" name="END_DATE">
+      </div>
+    </div>     
+     <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Set Goal !!</button>
+      </div>
+    </div>
+  </form>
+</div>
 </body>
 </html>
+

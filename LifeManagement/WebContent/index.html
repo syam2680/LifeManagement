@@ -1,96 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Syam's</title>
+<title>Life</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-* {
-    box-sizing: border-box;
+body  {
+    background-image: url("hd-beautiful-nature-wallpaper_042327317_304.jpg");
+    background-color: #cccccc;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    padding-top: 40px;
 }
 
-body {
-    margin: 0;
-}
-
-/* Style the header */
-.header {
-    background-color: #f1f1f1;
-    padding: 10px;
-    text-align: center;
-}
-
-/* Container for flexboxes */
-.row {
-    display: -webkit-flex;
-    display: flex;
-}
-
-/* Create three unequal columns that sits next to each other */
-.column {
-    padding: 10px;
-    height: 500px; /* Should be removed. Only for demonstration */
-}
-
-/* Left and right column */
-.column.side {
-   -webkit-flex: 1;
-   -ms-flex: 1;
-   flex: 1;
-}
-
-/* Middle column */
-.column.middle {
-    -webkit-flex: 2;
-    -ms-flex: 2;
-    flex: 2;
-}
-
-/* Style the footer */
-.footer {
-    background-color: #f1f1f1;
-    padding: 10px;
-    text-align: center;
-}
-
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media (max-width: 600px) {
-    .row {
-      -webkit-flex-direction: column;
-      flex-direction: column;
-    }
+.container{
+	color:white;
 }
 </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="scripts.js"></script>
 </head>
-<body>
+<body onload="updateCategories();updateTypes()">
+<div class="container">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-default btn-lg" id="myBtn">Set Goals!!</button>
 
-
-<div class="header">
-  <h4>Life Management System</h4>
+  <!-- Modal -->
+  <div class="modal fade" id="goal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form">
+            <div class="form-group">
+     <label for="GOAL" >Goal:</label>
+      <div >
+        <input type="text" class="form-control" id="GOAL" placeholder="Goal" name="GOAL">
+      </div>
+    </div>
+     <div class="form-group">
+     <label for="CATEGORY">Category:</label>
+     <div id="CATEGORY" >
+     
+      </div>      
+    </div>
+    
+     <div class="form-group">
+     <label for="TYPE">Type:</label>
+     <div  id="TYPE" >
+     
+      </div>      
+    </div>
+        <div class="form-group">
+        <label for="START_DATE">Start On:</label>
+	      <div >
+	        <input type="date" class="form-control" id="START_DATE" placeholder="Start On" name="START_DATE">
+	      </div>
+	    </div>
+        <div class="form-group">
+        <label for="DUE_DATE">Complete By:</label>
+      <div >
+        <input type="date" class="form-control" id="DUE_DATE" placeholder="Complete By " name="DUE_DATE">
+      </div>
+    </div>
+     <div class="form-group">
+     <label for="PARENT_GOAL_ID">Parent Goal:</label>
+     <div  id="PARENT_GOAL_ID" >
+     
+      </div>      
+    </div>    
+              
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Set Goal</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
 </div>
-
-<div class="row" id="row">
-
-  <div class="column side" style="background-color:#aaa;" align="center" id="l">
-  	
-  	Goals
-  		
-  </div>
-  
-  <div class="column middle" style="background-color:#bbb;" align="center" id="m">
-  
-  	To Do
-  
-  </div>
-  
-  <div class="column side" style="background-color:#ccc;" align="center" id="r">
-  
-  	Trackers
-  
-  </div>
-  
-</div>
-
-
+ 
+<script>
+$(document).ready(function(){
+    $("#myBtn").click(function(){
+        $("#goal").modal();
+    });
+});
+</script>    
 </body>
 </html>
